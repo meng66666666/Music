@@ -905,7 +905,7 @@ require(['jquery','com',"static/js/jquery.jplayer"], function ($, com){
           });
           html += '</dl>';
         }else{
-          html = '<div style="padding:15px;text-align:center;">没有相关歌曲！</div>'
+          html = '<div style="padding:15px;text-align:label;">没有相关歌曲！</div>'
         }
         $('.hotsearch').hide();
         $('#sugboxid').html(html).parent().show();

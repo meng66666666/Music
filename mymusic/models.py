@@ -10,17 +10,16 @@ class Wheel(models.Model):
 
 
 class User(models.Model):
-    username = models.CharField(max_length=20)
-    userpwd = models.CharField(max_length=20)
-    usertel = models.CharField(max_length=20)
-    user_sex = models.CharField(max_length=20)
-    is_staff = models.BooleanField()  # 登录admin权限
+    username = models.CharField(max_length=50, verbose_name='用户名')
+    password = models.CharField(max_length=100, verbose_name='密码')
+    phone_num = models.CharField(max_length=15, verbose_name='电话号码')
 
-    class Meta:
-        db_table = 'users'
+    def __str__(self):
+        return self.username
 
 
 class Singer(models.Model):
+    id = models.IntegerField(primary_key=True, auto_created=False, default=4292)
     singer_name = models.CharField(max_length=50)
     singer_img = models.URLField(max_length=200)
     album_img = models.URLField(max_length=200)
@@ -33,6 +32,7 @@ class Singer(models.Model):
 
 
 class Label(models.Model):
+    id = models.IntegerField(primary_key=True, auto_created=False, default=0)
     label_name = models.CharField(max_length=10)
 
     class Meta:
@@ -46,8 +46,7 @@ class Songs(models.Model):
     song_lyrics = models.TextField()
     song_album = models.CharField(max_length=50)  # 所属专辑
     song_time = models.TimeField()  # 歌曲时长
-    song_date = models.DateField()  # 发布时间
-    song_url = models.URLField(max_length=150)
+    song_url = models.CharField(max_length=150)
     play_num = models.IntegerField()
     download_num = models.IntegerField()
     is_free = models.BooleanField()  # 是否免费

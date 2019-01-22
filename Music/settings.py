@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mymusic',
     'myuser',
+    'label',
+    'user',
+    'ranking',
+    'search',
+    'play',
+
 ]
 
 MIDDLEWARE = [
@@ -57,6 +63,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'mymusic/templates'),
                  os.path.join(BASE_DIR, 'myuser/templates'),
+
                  ]
         ,
         'APP_DIRS': True,
