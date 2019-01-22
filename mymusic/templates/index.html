@@ -11,7 +11,7 @@
         <a href="/" class="logo" title="首页"><img alt="我的音乐" src="{% static "image/logo.png" %}"></a>
 
         <div class="search-box">
-            <form id="searchForm" action="#" method="post" target="_blank">
+            <form id="searchForm" action="{% url 'search:search' 1 %}" method="post" target="_blank">
                 {% csrf_token %}
                 <div class="search-keyword">
                     <input name="kword" type="text" class="keyword" maxlength="120" placeholder="音乐节"/>
@@ -68,7 +68,7 @@
                 <ul>
                     {% for song in play_hot_song %}
                         <li><span>{{ forloop.counter }}</span>
-                            <a target="play" href="#">{{ song.song_name }}</a>
+                            <a target="play" href="{% url 'player:play' song.song_id %}">{{ song.song_name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -95,7 +95,7 @@
                                 <div class="singer"><span>{{ list.singer.singer_name }}</span></div>
                                 {#                        <div class="times">发行时间：<span>{{ list.song_date }}</span></div>#}
                             </div>
-                            <a target="play" href="#" class="today-buy-button">去听听></a>
+                            <a target="play" href="{% url 'player:play' list.song_id %}" class="today-buy-button">去听听></a>
                         {% endfor %}
                     </ul>
                 </div>
@@ -116,7 +116,7 @@
                         {% endif %}
                     {% for songs in list %}
                         <li>
-                            <a target="play" href="#" class="pic layz_load pic_po">
+                            <a target="play" href="{% url 'player:play' songs.song_id %}" class="pic layz_load pic_po">
                                 <img data-src="{{ songs.song_img }}"></a>
                             <h3><a target="play" href="#">{{ songs.song_name }}</a></h3>
                             <div class="singer"><span>{{ songs.singer.singer_name }}</span></div>

@@ -8,5 +8,6 @@ app_name = 'mymusic'
 urlpatterns = [
     path('index/', index, name='index'),
     path('play/<song_id>/',play,name='player'),
-    path('search/<page>/',search,name='search')
+    # path('search/<int:page>/',search,name='search'),
+    path('search/<int:page>/',search,name='search'),
 ]
