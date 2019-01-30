@@ -22,11 +22,14 @@
                     {% csrf_token %}
                     <div id="registForm" class="formBox">
                     <div class="itembox user-name">
-
                         {{ form.as_p }}
                         {{ error }}
-
                     </div>
+                    <div class="profile__cover_link">
+                        <img src="{% static "image/user.jpg" %}"  width="100" height="100"
+                    style="border: 1px solid red;padding: 5px;" id="preImg"  onclick="selector.click()">
+                    </div>
+                    <input type="hidden" name="photo" id="photo">
                     {% if tips %}
                         <div>提示:<span>{{ tips }}</span></div>
                     {% endif %}
@@ -34,9 +37,11 @@
                         <input id="agree" name="agree" checked="checked" type="checkbox" value="1"><label for="agree" class="autologon">已阅读并同意用户注册协议</label>
                     </div>
                         <input type="submit" value="免费注册" id="J_RegButton" class="pass-btn tabInput"/>
-                        <div class="pass-reglink">已有我的音乐帐号，<a class="switch" href="{% url 'login' %}">立即登录</a></div>
+                        <div class="pass-reglink">已有我的音乐帐号，<a class="switch" href="{% url 'myuser:login' %}">立即登录</a></div>
                     </div>
+
                 </form>
+                <input type="file" id="selector" style="display: none" onchange="upload_img(this.files[0])">
             </div>
         </div>
     </div>

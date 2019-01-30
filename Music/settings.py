@@ -37,12 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mymusic',
     'myuser',
-    'label',
     'user',
     'ranking',
     'search',
     'play',
-
+    'label',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.music_middleware.LoginMiddleware',
 ]
 
 ROOT_URLCONF = 'Music.urls'
@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'UTC'
 
@@ -132,3 +132,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

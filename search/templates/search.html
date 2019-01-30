@@ -10,7 +10,7 @@
     <div class="header">
         <a href="{% url 'mymusic:index' %}" class="logo" title="首页"><img alt="我的音乐" src="{% static "image/logo.png" %}"></a>
         <div class="search-box">
-            <form id="searchForm" action="{% url 'search:search' 1 %}" method="post" target="_blank">
+            <form id="searchForm" action="{% url 'search:search' 1 %}" method="post" target="_self">
                 {% csrf_token %}
                 <div class="search-keyword">
                     <input id="kword" name="kword"  type="text" class="keyword" maxlength="120" placeholder="音乐节"  />
@@ -29,8 +29,8 @@
 		<div class="nav-box-inner">
 			<ul class="nav clearfix">
                 <li><a href='{% url "mymusic:index" %}'>首页</a></li>
-				<li><a href='{% url "ranking" %}' target="_blank">歌曲排行</a></li>
-	    	    <li><a href='{% url "home" %}' target="_blank">用户中心</a></li>
+				<li><a href='{% url "ranking:ranking" %}' target="_self">歌曲排行</a></li>
+	    	    <li><a href='{% url "user:home" %}' target="_self">用户中心</a></li>
 			</ul>
 		</div>
 	</div><!--end nav-box-->
@@ -48,7 +48,7 @@
                 <div class="songlist__item">
                     <div class="songlist__songname">
                         <span class="songlist__songname_txt">
-                            <a href="{% url 'player:play' list.song_id %}" class="js_song" target="play" >{{list.song_name}}</a>
+                            <a href="{% url 'player:play' list.song_id %}" class="js_song" target="_self" >{{list.song_name}}</a>
                         </span>
                     </div>
                     <div class="songlist__artist">

@@ -18,3 +18,4 @@ def index(request):
     all_ranking = [search_ranking, down_ranking]
     return render(request, 'index.html', locals())
 
+

@@ -14,13 +14,14 @@
     </div>
 
     <div class="content clearfix">
-        <!-- 登录注册版块 -->
+        <!-- 登录版块 -->
         <div id="unauth_main" class="login-regist">
             <div class="login-box switch_box" style="display:block;">
                 <div class="title">用户登录</div>
-                <form id="loginForm" class="formBox" action="" method="post">
+                <form id="loginForm" class="formBox" action="{% url 'myuser:login' %}" method="post">
+                    {% csrf_token %}
                     <div id="loginForm" class="formBox">
-                        {% csrf_token %}
+
                         <div class="itembox user-name">
                             <div class="item">
                                 <input type="text" name="loginUser" placeholder="用户名" class="txt tabInput">
@@ -30,6 +31,7 @@
                             <div class="item">
                                 <input type="password" name="password" placeholder="登录密码" class="txt tabInput">
                             </div>
+                        {{ error }}
 {#                        </div>#}
                         {% if tips %}
                             <div>提示:<span>{{ tips }}</span></div>
@@ -37,7 +39,7 @@
                         <div id="loginBtnBox" class="login-btn">
                             <input id="J_LoginButton" type="submit" value="马上登录" class="tabInput pass-btn" />
                         </div>
-                        <div class="pass-reglink">还没有我的音乐账号？<a class="switch" href="{% url 'register' %}">免费注册</a></div>
+                        <div class="pass-reglink">还没有我的音乐账号？<a class="switch" href="{% url 'myuser:register' %}">免费注册</a></div>
                     </div>
                 </form>
             </div>

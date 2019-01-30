@@ -21,7 +21,7 @@
             <div id="suggest" class="search-suggest"></div>
             <div class="search-hot-words">
                 {% for song in search_song  %}
-                    <a target="play" href="{% url 'play' song.song.song_id %}">{{ song.song.song_name }}</a>
+                    <a target="play" href="{% url 'player:play' song.song.song_id %}">{{ song.song.song_name }}</a>
                 {% endfor  %}
             </div>
         </div>
@@ -30,9 +30,9 @@
 	<div class="nav-box">
 		<div class="nav-box-inner">
 			<ul class="nav clearfix">
-				<li><a href="/">首页</a></li>
-				<li><a href="{% url 'ranking' %}" target="_blank">歌曲排行</a></li>
-	    	    <li><a href="{% url 'home'  %}" target="_blank">用户中心</a></li>
+				<li><a href="{% url 'mymusic:index' %}">首页</a></li>
+				<li><a href="{% url 'ranking:ranking' %}" target="_self">歌曲排行</a></li>
+	    	    <li><a href="{% url 'user:home' %}" target="_self">用户中心</a></li>
 			</ul>
 		</div>
 	</div><!--end nav-box-->
@@ -40,12 +40,16 @@
     <div class="mod_profile js_user_data" style="">
         <div class="section_inner">
             <div class="profile__cover_link">
-                <img src="{% static "image/user.jpg" %}" class="profile__cover">
+                <img src="{% static figure_path %}" class="profile__cover">
             </div>
             <h1 class="profile__tit">
-                <span class="profile__name">{{ user.username }}</span>
+                {% if request.session.user_id %}
+                    <span class="profile__name">{{ user.username }}</span>
+                {% else %}
+                    <span class="profile__name"> <a href="{% url 'myuser:login' %}" style="color: red">点击登录</a> </span>
+                {% endif %}
             </h1>
-                <a href="#" style="color:white;">退出登录</a>
+                <a href="{% url 'user:logout' %}" style="color:white;">退出登录</a>
         </div>
     </div>
 	<div class="main main--profile" style="">
@@ -83,14 +87,14 @@
 						<div class="pagebar" id="pageBar">
 
                             {% if contacts.has_previous %}
-                            <a href="{% url 'home' contacts.previous_page_number %}" class="prev" target="_self"><i></i>上一页</a>
+                            <a href="{% url 'user:home' contacts.previous_page_number %}" class="prev" target="_self"><i></i>上一页</a>
                             {% endif %}
 
                             {% for page in contacts.paginator.page_range %}
                                 {% if contacts.number == page %}
                                     <span class="sel">{{ page }}</span>
                                 {% else %}
-                                    <a href="{% url 'home' page %}" target="_self">{{ page }}</a>
+                                    <a href="#" target="_self">{{ page }}</a>
                                 {% endif %}
                             {% endfor %}
 

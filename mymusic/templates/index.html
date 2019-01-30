@@ -11,7 +11,7 @@
         <a href="/" class="logo" title="首页"><img alt="我的音乐" src="{% static "image/logo.png" %}"></a>
 
         <div class="search-box">
-            <form id="searchForm" action="{% url 'search:search' 1 %}" method="post" target="_blank">
+            <form id="searchForm" action="{% url 'search:search' 1 %}" method="post" target="_self">
                 {% csrf_token %}
                 <div class="search-keyword">
                     <input name="kword" type="text" class="keyword" maxlength="120" placeholder="音乐节"/>
@@ -21,7 +21,7 @@
             <div id="suggest" class="search-suggest"></div>
             <div class="search-hot-words">
                 {% for song in search_song %}
-                    <a target="play" href="#">{{ song.song.song_name }}</a>
+                    <a target="_self" href="{% url 'player:play' song.song_id %}">{{ song.song.song_name }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -29,9 +29,9 @@
     <div class="nav-box">
         <div class="nav-box-inner">
             <ul class="nav clearfix">
-                <li><a href="{% url 'mymusic:index' %}">首页</a></li>
-                <li><a href="{% url 'ranking' %}" target="_blank">歌曲排行</a></li>
-                <li><a href="{% url 'home' %}" target="_blank">用户中心</a></li>
+                <li><a href="{% url 'mymusic:index' %}" style="color: white" target="_self">首页</a></li>
+                <li><a href="{% url 'ranking:ranking' %}" target="_self" style="color: white">歌曲排行</a></li>
+                <li><a href="{% url 'user:home' %}" target="_self" style="color: white">用户中心</a></li>
             </ul>
             <div class="category-nav">
                 <div class="category-nav-header">
@@ -41,7 +41,7 @@
                     <div id="J_CategoryItems" class="category-items">
                         {% for label in label_list %}
                             <div class="item" data-index="1"><h3>
-                                <a href="javascript:;">{{ label.label_name }}</a></h3>
+                                <a href="#">{{ label.label_name }}</a></h3>
                             </div>
                         {% endfor %}
                     </div>
@@ -67,8 +67,8 @@
                 <h2>热门歌曲</h2>
                 <ul>
                     {% for song in play_hot_song %}
-                        <li><span>{{ forloop.counter }}</span>
-                            <a target="play" href="{% url 'player:play' song.song_id %}">{{ song.song_name }}</a>
+                        <li><span style="color: #80AE27">{{ forloop.counter }}</span>
+                            <a target="_self" href="{% url 'player:play' song.song_id %} " style="color: white" >{{ song.song_name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -91,11 +91,11 @@
                             <a class="pic layz_load pic_po" target="play" href="#">
                                 <img data-src="{{ list.song_img }}"></a>
                             <div class="name">
-                                <h3><a target="play" href="#">{{ list.song_name }}</a></h3>
-                                <div class="singer"><span>{{ list.singer.singer_name }}</span></div>
+                                <h3><a target="_self" href="{% url 'player:play' list.song_id %}" style="color: yellow">{{ list.song_name }}</a></h3>
+                                <div class="singer"><span style="color: white">{{ list.singer.singer_name }}</span></div>
                                 {#                        <div class="times">发行时间：<span>{{ list.song_date }}</span></div>#}
                             </div>
-                            <a target="play" href="{% url 'player:play' list.song_id %}" class="today-buy-button">去听听></a>
+                            <a target="_self" href="{% url 'player:play' list.song_id %}" class="today-buy-button">去听听></a>
                         {% endfor %}
                     </ul>
                 </div>
@@ -103,8 +103,8 @@
         </div><!--end today-->
         <div class="section">
             <ul id="J_Tab" class="tab-trigger">
-                <li data-cur="0" class="current t_c">热门搜索</li>
-                <li data-cur="1" class="t_c">热门下载</li>
+                <li data-cur="0" class="current t_c" style="color: lightgoldenrodyellow">热门搜索</li>
+                <li data-cur="1" class="t_c" style="color: lightgoldenrodyellow">热门下载</li>
             </ul>
             <div class="tab-container">
                 <div id="J_Tab_Con" class="tab-container-cell">
@@ -116,12 +116,12 @@
                         {% endif %}
                     {% for songs in list %}
                         <li>
-                            <a target="play" href="{% url 'player:play' songs.song_id %}" class="pic layz_load pic_po">
+                            <a target="_self" href="{% url 'player:play' songs.song_id %}" class="pic layz_load pic_po" >
                                 <img data-src="{{ songs.song_img }}"></a>
-                            <h3><a target="play" href="#">{{ songs.song_name }}</a></h3>
-                            <div class="singer"><span>{{ songs.singer.singer_name }}</span></div>
+                            <h3><a target="_self" href="{% url 'player:play' songs.song_id %}" style="color: yellow">{{ songs.song_name }}</a></h3>
+                            <div class="singer"><span style="color: white">{{ songs.singer.singer_name }}</span></div>
                             {% if all_ranking|first  == list %}
-                                <div class="times">搜索次数：<span>{{ songs.play_num }}</span></div>
+                                <div class="times" style="color: white">搜索次数：<span>{{ songs.play_num }}</span></div>
                             {% else %}
                                 <div class="times">下载次数：<span>{{ songs.download_num }}</span></div>
                             {% endif %}

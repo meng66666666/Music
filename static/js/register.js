@@ -71,3 +71,44 @@ require(['jquery','com'], function ($,com){
     }
   }
 });
+
+
+function upload_img(file) {
+    // file.name 文件名, file.size 文件大小, file.type 文件类型
+    if(file.type == 'image/png' || file.type == 'image/jpeg'){
+        if(file.size <= 2048*1024){
+            // 上传图片-ajax
+            var request = new XMLHttpRequest()
+            url = '/upload/' ; // 上传图片的服务器的接口
+            request.open('POST', url, true)
+            request.onload = function (ev) {
+                if(request.status == 200 && request.readyState == 4){
+                    // 请求成功
+                    data = JSON.parse(request.responseText)
+                    if(data.msg == 1){
+                        // 显示 图片
+                        $('#preImg').attr('src', '/static/'+data.path)
+
+                        // 将上传图片保存服务中的路径写入到 photo隐藏字段中
+                        $('#photo').attr('value', data.path)
+
+                    }
+                }
+            }
+
+            var formdata = new FormData()  // 创建FormData表单数据对象
+            formdata.append('photo', file)  // 文件的表单字段
+
+            request.send(formdata)  // formdata 可以上传最大到4G的文件
+
+        }else{
+             alert('当前文件的大小超过2M: '+file.size)
+        }
+    }else{
+        alert('当前文件的类型不支持'+file.type)
+    }
+}
+
+
+
+

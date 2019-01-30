@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="header">
-		<a href="{% url 'mymusic:index' %}" class="logo" title="首页"><img src="{% static "image/logo.png" %}"></a>
+		<a href="#" class="logo" title="首页"><img src="{% static "image/logo.png" %}"></a>
 		<div class="search-box">
 			<!-- 歌曲查询 -->
             <form id="searchForm" action="{% url 'search:search' 1 %}" method="post" target="_blank">
@@ -32,10 +32,10 @@
 	<div class="nav-box">
 		<div class="nav-box-inner">
 			<ul class="nav clearfix">
-				<li><a href="#" style="color:white">首页</a></li>
+				<li><a href="{% url 'mymusic:index' %}" style="color:white">首页</a></li>
 {#                <li><a href=" {{ song.song_url }}">音乐</a></li>#}
-				<li><a href="{% url 'ranking' %}" target="_blank" style="color:white">歌曲排行</a></li>
-	    	    <li><a href="{% url 'home' %}" target="_blank" style="color:white">用户中心</a></li>
+				<li><a href="{% url 'ranking:ranking' %}" target="_self" style="color:white">歌曲排行</a></li>
+	    	    <li><a href="{% url 'user:home' %}" target="_self" style="color:white">用户中心</a></li>
 			</ul>
 		</div>
 	</div><!--end nav-box-->

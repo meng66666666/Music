@@ -5,7 +5,7 @@ require.config({
   }
 });
 
-require(['jquery','com',"static/js/jquery.jplayer"], function ($, com){
+require(['jquery','com',"jquery.jplayer"], function ($, com){
   //pk柱高度
   function pkCol(){
     var bar = $('.vote-bar-inner');
